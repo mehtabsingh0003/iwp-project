@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Album</title>
+    <style>
+        /* Styles and animations for mobile compatibility */
+
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(to right, #e0eafc, #cfdef3);
+        }
+
+        .album {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: center;
+            margin-bottom: 20px;
+            animation: fadeIn 1s ease-in;
+        }
+
+        .thumbnail {
+            width: 100px;
+            cursor: pointer;
+            border: 3px solid #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transform: scale(0.9);
+            animation: slideIn 0.5s ease-in forwards;
+        }
+
+        .thumbnail:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            background-color: rgba(0, 0, 0, 0.9);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeZoomIn 0.4s ease;
+        }
+
+        .modal-content {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #fff;
+            font-size: 40px;
+            font-weight: bold;
+            cursor: pointer;
+            z-index: 1001;
+            transition: color 0.3s, transform 0.3s;
+        }
+
+        .close:hover {
+            color: #ff7f7f;
+            transform: scale(1.1);
+            animation: pulse 0.7s infinite;
+        }
+
+        @media (max-width: 600px) {
+            .thumbnail {
+                width: 80px;
+            }
+
+            .close {
+                font-size: 30px;
+            }
+        }
+
+        /* Keyframes for animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px) scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes fadeZoomIn {
+            from {
+                opacity: 0;
+                transform: scale(0.9);
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.15); }
+        }
+    </style>
+</head>
+<body>
+    <div class="album">
+        <img src="ChristtheRedeemer.avif" alt="Image 1" class="thumbnail" onclick="openModal(this.src)">
+        <img src="colloseum.avif" alt="Image 2" class="thumbnail" onclick="openModal(this.src)">
+        <img src="greatwall.avif" alt="Image 3" class="thumbnail" onclick="openModal(this.src)">
+        <img src="machupichu.avif" alt="Image 4" class="thumbnail" onclick="openModal(this.src)">
+        <img src="petra.avif" alt="Image 5" class="thumbnail" onclick="openModal(this.src)">
+        <img src="tajmahal.avif" alt="Image 6" class="thumbnail" onclick="openModal(this.src)">
+        <img src="templeofkukulcan.avif" alt="Image 7" class="thumbnail" onclick="openModal(this.src)">
+        <img src="pyramid.jpeg" alt="Image 8" class="thumbnail" onclick="openModal(this.src)">
+    </div>
+
+    <div id="modal" class="modal" onclick="closeModal()">
+        <span class="close">&times;</span>
+        <img class="modal-content" id="modal-image">
+    </div>
+
+    <script>
+        let currentImageIndex = 0;
+        const images = [];
+        let startX = 0;
+
+        function openModal(src) {
+            const modal = document.getElementById("modal");
+            const modalImage = document.getElementById("modal-image");
+
+            modal.style.display = "flex";
+            modalImage.src = src;
+            currentImageIndex = Array.from(document.querySelectorAll('.thumbnail')).findIndex(img => img.src === src);
+
+            if (images.length === 0) {
+                document.querySelectorAll('.thumbnail').forEach(img => images.push(img.src));
+            }
+        }
+
+        function closeModal() {
+            const modal = document.getElementById("modal");
+            modal.style.display = "none";
+        }
+
+        function changeImage(direction) {
+            currentImageIndex = (currentImageIndex + direction + images.length) % images.length;
+            const modalImage = document.getElementById("modal-image");
+            modalImage.src = images[currentImageIndex];
+        }
+
+        document.addEventListener('keydown', (event) => {
+            const modal = document.getElementById("modal");
+            if (modal.style.display === "flex") {
+                if (event.key === 'ArrowRight') {
+                    changeImage(1);
+                } else if (event.key === 'ArrowLeft') {
+                    changeImage(-1);
+                } else if (event.key === 'Escape') {
+                    closeModal();
+                }
+            }
+        });
+
+        document.getElementById('modal').addEventListener('touchstart', (event) => {
+            startX = event.touches[0].clientX;
+        });
+
+        document.getElementById('modal').addEventListener('touchmove', (event) => {
+            event.preventDefault();
+        });
+
+        document.getElementById('modal').addEventListener('touchend', (event) => {
+            const endX = event.changedTouches[0].clientX;
+            const distance = endX - startX;
+
+            if (Math.abs(distance) > 50) {
+                if (distance < 0) {
+                    changeImage(1);
+                } else {
+                    changeImage(-1);
+                }
+            }
+        });
+    </script>
+</body>
+</html>

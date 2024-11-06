@@ -1,0 +1,118 @@
+body {
+    font-family: 'Arial', sans-serif;
+    margin: 0;
+    padding: 20px;
+    background: linear-gradient(to right, #e0eafc, #cfdef3);
+}
+
+.album {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center; /* Center the album */
+    margin-bottom: 20px;
+    animation: fadeIn 1s ease-in; /* Album fade-in */
+}
+
+.thumbnail {
+    width: 120px; /* Adjust thumbnail size */
+    height: auto;
+    cursor: pointer;
+    border: 3px solid #f2f2f2;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0; /* Start invisible */
+    transform: scale(0.9); /* Start with a slight zoom-out */
+    animation: slideIn 0.5s ease-in forwards; /* Slide in and fade effect */
+}
+
+.thumbnail:hover {
+    transform: scale(1.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1000; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: hidden; /* Prevent scrolling */
+    background-color: rgba(0, 0, 0, 0.9);
+    display: flex; /* Flex display for centering */
+    justify-content: center; /* Center modal content */
+    align-items: center; /* Center modal content */
+    animation: fadeZoomIn 0.4s ease; /* Fade and zoom animation */
+}
+
+.modal-content {
+    max-width: 90%; /* Max size for modal image */
+    max-height: 90%; /* Max height for modal image */
+    object-fit: contain; /* Keep aspect ratio */
+    border-radius: 10px; /* Rounded corners for modal image */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.close {
+    position: absolute;
+    top: 20px;
+    right: 30px;
+    color: #fff;
+    font-size: 40px;
+    font-weight: bold;
+    cursor: pointer;
+    z-index: 1001; /* Ensure the close button is on top */
+    transition: color 0.3s, transform 0.3s;
+}
+
+.close:hover {
+    color: #ff7f7f; /* Change color on hover */
+    transform: scale(1.1); /* Slightly increase size on hover */
+    animation: pulse 0.7s infinite; /* Pulsing animation */
+}
+
+@media (max-width: 600px) {
+    .thumbnail {
+        width: 80px; /* Smaller thumbnail size on small screens */
+    }
+
+    .close {
+        font-size: 30px; /* Smaller close button on small screens */
+    }
+}
+
+/* Keyframes for animations */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.9); /* Slide up and zoom in */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes fadeZoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9); /* Slight zoom-in effect */
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.15); }
+}

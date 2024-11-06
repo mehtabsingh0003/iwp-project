@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Area Calculator</h1>
+
+        <!-- Buttons to show input fields for circle or square -->
+        <button id="circleButton">Calculate Area of Circle</button>
+        <button id="squareButton">Calculate Area of Square</button>
+
+        <!-- Circle Area Calculation Section -->
+        <div id="circleSection" class="shape-section hidden">
+            <h2>Circle Area</h2>
+            <input type="number" id="circleRadius" placeholder="Enter radius" min="0" step="0.1">
+            <button id="calculateCircle">Calculate</button>
+            <div id="circleResult" class="result"></div>
+        </div>
+
+        <!-- Square Area Calculation Section -->
+        <div id="squareSection" class="shape-section hidden">
+            <h2>Square Area</h2>
+            <input type="number" id="squareSide" placeholder="Enter side length" min="0" step="0.1">
+            <button id="calculateSquare">Calculate</button>
+            <div id="squareResult" class="result"></div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f4f4f4;
+}
+
+.parent {
+    padding: 20px;
+    margin: 10px;
+    background-color: #8e2854; /* Background color */
+    color: white; /* Text color */
+    border-radius: 10px; /* Rounded corners */
+    text-align: center;
+    position: relative;
+    border: 2px solid #ffffff; /* White border */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    transition: background-color 0.3s, transform 0.3s; /* Smooth transitions */
+}
+
+.parent:hover {
+    background-color: #a04b6f; /* Slightly lighter background on hover */
+    transform: translateY(-5px); /* Lift effect on hover */
+}

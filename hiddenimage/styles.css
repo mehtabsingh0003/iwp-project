@@ -1,0 +1,56 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Modern font */
+    background-color: #e9ecef; /* Lighter background color */
+    text-align: center; /* Center text alignment */
+    margin: 0; /* Remove default margin */
+    padding: 20px; /* Add some padding to the body */
+}
+
+.container {
+    max-width: 600px; /* Maximum width of the container */
+    margin: 0 auto; /* Center the container */
+    padding: 30px; /* Padding inside the container */
+    background-color: white; /* White background for the container */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); /* Deeper shadow effect */
+}
+
+h1 {
+    color: #343a40; /* Dark gray color for the heading */
+    font-size: 2.5em; /* Larger heading */
+    margin-bottom: 20px; /* Space below the heading */
+}
+
+#toggleButton {
+    padding: 12px 24px; /* Button padding */
+    font-size: 18px; /* Button font size */
+    cursor: pointer; /* Pointer cursor on hover */
+    border: none; /* No border */
+    border-radius: 6px; /* Rounded corners for the button */
+    margin: 5px; /* Margin around the button */
+    background-color: #28a745; /* Green background color */
+    color: white; /* White text color */
+    transition: background-color 0.3s, transform 0.2s; /* Smooth background and transform transition */
+}
+
+#toggleButton:hover {
+    background-color: #218838; /* Darker green on hover */
+    transform: scale(1.05); /* Slightly grow the button on hover */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2); /* Shadow effect on hover */
+}
+
+.image-container {
+    margin-top: 20px; /* Space above the image container */
+}
+
+img {
+    max-width: 100%; /* Responsive image: take up 100% of the container's width */
+    border: 2px solid #343a40; /* Added border style */
+    border-radius: 8px; /* Rounded corners for the image */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Shadow effect for the image */
+    transition: opacity 0.5s ease; /* Smooth transition for visibility */
+}
+
+.hidden {
+    display: none; /* Hides the image */
+}
